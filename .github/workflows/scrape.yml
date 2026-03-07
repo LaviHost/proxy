@@ -1,0 +1,47 @@
+name: 🌐 Proxy Scraper
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # every hour, on the hour
+  workflow_dispatch:        # also allows manual "Run" button in GitHub UI
+
+permissions:
+  contents: write           # needed to commit proxies.xlsx back to repo
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: 🕷️ Run proxy scraper
+        run: python proxy_scraper.py
+
+      - name: 📤 Commit & push proxies.xlsx
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add proxies.xlsx summary.json
+          git diff --cached --quiet || git commit -m "🔄 Proxy update $(date +'%Y-%m-%d %H:%M UTC')"
+          git push
+
+      - name: 📎 Upload Excel as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: proxies-${{ github.run_number }}
+          path: |
+            proxies.xlsx
+            summary.json
+          retention-days: 7
