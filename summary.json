@@ -1,22 +1,22 @@
 {
-  "last_updated": "2026-04-25 22:41 UTC",
-  "total": 7550,
-  "live": 1375,
-  "dead": 6175,
-  "live_rate_pct": 18.2,
-  "avg_latency_ms": 1172,
+  "last_updated": "2026-04-25 23:42 UTC",
+  "total": 7476,
+  "live": 1491,
+  "dead": 5985,
+  "live_rate_pct": 19.9,
+  "avg_latency_ms": 1220,
   "by_source": {
     "free-proxy-list.net": 308,
-    "proxyscrape.com": 2050,
-    "proxynova.com": 16,
-    "geonode.com": 483,
-    "github/proxifly": 1752,
-    "github/TheSpeedX": 2941
+    "proxyscrape.com": 1956,
+    "geonode.com": 486,
+    "proxynova.com": 5,
+    "github/proxifly": 1671,
+    "github/TheSpeedX": 3050
   },
   "by_protocol": {
-    "HTTP": 3929,
-    "HTTPS": 26,
-    "SOCKS4": 1233,
-    "SOCKS5": 2362
+    "HTTPS": 33,
+    "HTTP": 4097,
+    "SOCKS4": 1275,
+    "SOCKS5": 2071
   }
 }
